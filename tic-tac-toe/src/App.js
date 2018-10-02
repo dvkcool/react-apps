@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-
+import Player from './components/chooseplayer';
 class App extends Component {
   constructor(props){
     super(props)
     this.state ={
       board : Array(9).fill(null),
-      player: "X"
+      player: null
     }
   }
 
@@ -39,7 +39,7 @@ class App extends Component {
 
   handleClick(index){
 
-    if(!this.state.board[index] && !this.state.winner){
+    if(!this.state.player && !this.state.board[index] && !this.state.winner){
       let temp = this.state.board;
       temp[index] = this.state.player;
       let newplayer = this.state.player === "X" ? "O" : "X"
@@ -50,6 +50,12 @@ class App extends Component {
       this.checkwinner();
     }
 
+  }
+
+  setPlayer(player){
+    this.setState({
+      player
+    })
   }
   render() {
     const Boxes = this.state.board.map(
@@ -71,6 +77,7 @@ class App extends Component {
         </header>
         <div className="Container">
           <h1> Tic Tac Toe game </h1>
+          <Player player={(e) => this.setPlayer(e)}/>
           <div className="board">
             {Boxes}
           </div>
