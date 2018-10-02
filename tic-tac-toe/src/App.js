@@ -6,15 +6,27 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state ={
-      board : Array(9).fill(null)
+      board : Array(9).fill(null),
+      player: "X"
     }
   }
 
-  handleClick(e){
-    console.log(e.target);
+  handleClick(index){
+    let temp = this.state.board;
+    console.log(this.state.board);
+    temp[index] = this.state.player;
+    let newplayer = this.state.player === "X" ? "O" : "X"
+    this.setState({
+      board: temp,
+      player: newplayer
+    })
   }
   render() {
-    const Boxes = this.state.board.map((box, index) => <div className="box" key={index} onClick={(e) => this.handleClick(e)}>{box}</div>)
+    const Boxes = this.state.board.map(
+      (box, index) =>
+      <div className="box"
+      key={index}
+      onClick={() => this.handleClick(index)}>{box}</div>)
     return (
       <div className="App">
         <header className="App-header">
