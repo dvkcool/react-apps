@@ -28,6 +28,9 @@ class App extends Component {
       const [a, b, c] = winLines[index];
       if( this.state.board[a]  && this.state.board[a] === this.state.board[b] && this.state.board[a] === this.state.board[c]){
         alert('You won');
+        this.setState({
+          winner: this.state.player
+        })
       }
     }
 
@@ -36,7 +39,7 @@ class App extends Component {
 
   handleClick(index){
 
-    if(!this.state.board[index]){
+    if(!this.state.board[index] && !this.state.winner){
       let temp = this.state.board;
       temp[index] = this.state.player;
       let newplayer = this.state.player === "X" ? "O" : "X"
