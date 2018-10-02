@@ -3,7 +3,18 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  constructor(props){
+    super(props)
+    this.state ={
+      board : Array(9).fill(null)
+    }
+  }
+
+  handleClick(e){
+    console.log(e.target);
+  }
   render() {
+    const Boxes = this.state.board.map((box, index) => <div className="box" key={index} onClick={(e) => this.handleClick(e)}>{box}</div>)
     return (
       <div className="App">
         <header className="App-header">
@@ -19,15 +30,7 @@ class App extends Component {
         <div className="Container">
           <h1> Tic Tac Toe game </h1>
           <div className="board">
-            <div className="box"></div>
-            <div className="box"></div>
-            <div className="box"></div>
-            <div className="box"></div>
-            <div className="box"></div>
-            <div className="box"></div>
-            <div className="box"></div>
-            <div className="box"></div>
-            <div className="box"></div>
+            {Boxes}
           </div>
 
         </div>
