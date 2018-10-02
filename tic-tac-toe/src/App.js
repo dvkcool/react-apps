@@ -11,15 +11,42 @@ class App extends Component {
     }
   }
 
+  checkwinner(){
+    let winLines = [
+      ["0", "1", "2"],
+      ["3", "4", "5"],
+      ["6", "7", "8"],
+      ["0", "3", "6"],
+      ["1", "4", "7"],
+      ["2", "5", "8"],
+      ["0", "4", "8"],
+      ["2", "4", "6"]
+
+    ]
+
+    for(let index=0; index < winLines.length; index++){
+      const [a, b, c] = winLines[index];
+      if( this.state.board[a]  && this.state.board[a] === this.state.board[b] && this.state.board[a] === this.state.board[c]){
+        alert('You won');
+      }
+    }
+
+  }
+
+
   handleClick(index){
-    let temp = this.state.board;
-    console.log(this.state.board);
-    temp[index] = this.state.player;
-    let newplayer = this.state.player === "X" ? "O" : "X"
-    this.setState({
-      board: temp,
-      player: newplayer
-    })
+
+    if(!this.state.board[index]){
+      let temp = this.state.board;
+      temp[index] = this.state.player;
+      let newplayer = this.state.player === "X" ? "O" : "X"
+      this.setState({
+        board: temp,
+        player: newplayer
+      })
+      this.checkwinner();
+    }
+
   }
   render() {
     const Boxes = this.state.board.map(
